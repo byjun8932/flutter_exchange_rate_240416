@@ -1,9 +1,19 @@
-class ExchangeRateDataSource {
-  final _baseUrl = 'http://swopenapi.seoul.go.kr/api/subway/sample/json/realtimeStationArrival/0/5';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
-  Future<SubwayDto> getSubwayResult(String query) async {
-    final response = await http.get(Uri.parse(
-        '$_baseUrl/$query'));
-    return SubwayDto.fromJson(jsonDecode(response.body));
+import '../dto/exchange_dto.dart';
+
+class ExchangeRateDataSource {
+  final _baseUrl =
+      'https://v6.exchangerate-api.com/v6/';
+
+  Future<ExchangeDto> getExchangeResult(String query) async {
+    final response = await http.get(Uri.parse('$_baseUrl/latest/$query'));
+    return ExchangeDto.fromJson(jsonDecode(response.body));
   }
 }
+
+/*void main() async {
+  final test = ExchangeRateDataSource();
+  final Test = await test.getSubwayResult('USD');
+}*/
