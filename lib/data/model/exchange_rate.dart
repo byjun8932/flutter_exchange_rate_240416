@@ -9,7 +9,7 @@ part 'exchange_rate.g.dart';
 class ExchangeRate with _$ExchangeRate {
   const factory ExchangeRate({
     required String baseCode,
-    required num conversionRates
+    required Map<String, dynamic> conversionRates,
   }) = _ExchangeRate;
 
   factory ExchangeRate.fromJson(Map<String, Object?> json) => _$ExchangeRateFromJson(json);

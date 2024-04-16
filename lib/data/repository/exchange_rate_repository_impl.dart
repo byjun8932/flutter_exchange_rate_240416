@@ -12,19 +12,22 @@ class ExchangesRepositoryImpl implements ExchangesRepository {
   }) : _exchangeRateDataSource = exchangeRateDataSource;
 
   @override
-  Future<ExchangeRate> getExchanges(String standard , String exchange) async{
+  Future<ExchangeRate> getExchanges(String standard) async {
     final dto = await _exchangeRateDataSource.getExchangeResult(standard);
 
     if (dto == null) {
-      return ExchangeRate(baseCode: '', conversionRates: 0);
+      return ExchangeRate(
+        baseCode: '',
+        conversionRates: {},
+      );
     }
-    return dto.toExchangeRate(exchange);
+    return dto.toExchangeRate();
   }
-
 }
 
-void main() async{
-  ExchangesRepository exchangesRepository  = ExchangesRepositoryImpl( exchangeRateDataSource: ExchangeRateDataSource());
-  final test = await exchangesRepository.getExchanges('USD', 'BRL');
-   print(test.toString());
-}
+/*void main() async {
+  ExchangesRepository exchangesRepository =
+      ExchangesRepositoryImpl(exchangeRateDataSource: ExchangeRateDataSource());
+  final test = await exchangesRepository.getExchanges('USD');
+  print(test.toString());
+}*/
