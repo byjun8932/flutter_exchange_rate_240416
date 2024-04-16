@@ -26,10 +26,10 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     final viewModel = context.watch<ExchangeViewModel>();
     final state = viewModel.state;
-    String dropdownValue1 = '';
-    String dropdownValue2 = '';
-    //String inputValue = '';
 
+    //String inputValue = '';
+    TextEditingController myController1 = TextEditingController();
+    TextEditingController myController2 = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -41,10 +41,10 @@ class _MainPageState extends State<MainPage> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                /*Expanded(
+                Expanded(
                   flex: 1,
                   child: DropdownButton(
-                    value: viewModel.stand,
+                    value: viewModel.standarddrp,
                     items: state.exchangeRate.conversionRates.keys
                         .map<DropdownMenuItem<String>>(
                       (e) {
@@ -58,11 +58,23 @@ class _MainPageState extends State<MainPage> {
                       viewModel.changtext(value!);
                     },
                   ),
-                ),*/
+                ),
+
+                Expanded(
+                  flex: 3,
+                  child: TextField(
+                    controller: myController1 ,
+                  ),
+                )
+              ],
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                 Expanded(
                   flex: 1,
-                  child: DropdownButton<String>(
-                    value: viewModel.standarddrp,
+                  child: DropdownButton(
+                    value: viewModel.compare,
                     items: state.exchangeRate.conversionRates.keys
                         .map<DropdownMenuItem<String>>(
                           (e) {
@@ -72,17 +84,20 @@ class _MainPageState extends State<MainPage> {
                         );
                       },
                     ).toList(),
-                    onChanged: (String? value) {  },
-                  ) ,
+                    onChanged: (value) {
+                      viewModel.changtext(value!);
+                    },
+                  ),
                 ),
+
                 Expanded(
                   flex: 3,
                   child: TextField(
-                    //controller: ,
+                    controller: myController2 ,
                   ),
                 )
               ],
-            )
+            ),
           ],
         ),
       ),

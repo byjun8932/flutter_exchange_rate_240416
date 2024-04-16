@@ -14,8 +14,10 @@ class ExchangeViewModel with ChangeNotifier {
 
   String _standarddrp = 'USD';
   String get standarddrp => _standarddrp;
-/*  String _compare = '';
-  String get compare => _compare;*/
+
+
+  String _compare = 'USD';
+  String get compare => _compare;
 
   void onSearch(String standard) async {
     _state = state.copyWith(isLoading: true);
@@ -30,6 +32,11 @@ class ExchangeViewModel with ChangeNotifier {
 
   void changtext(String txt){
     _standarddrp = txt;
+    notifyListeners();
+  }
+
+  void changtext2(String txt){
+    _compare = txt;
     notifyListeners();
   }
 
