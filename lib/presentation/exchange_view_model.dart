@@ -12,6 +12,11 @@ class ExchangeViewModel with ChangeNotifier {
   SearchState _state = const SearchState();
   SearchState get state => _state;
 
+  String _standarddrp = 'USD';
+  String get standarddrp => _standarddrp;
+/*  String _compare = '';
+  String get compare => _compare;*/
+
   void onSearch(String standard) async {
     _state = state.copyWith(isLoading: true);
     notifyListeners();
@@ -22,4 +27,10 @@ class ExchangeViewModel with ChangeNotifier {
     );
     notifyListeners();
   }
+
+  void changtext(String txt){
+    _standarddrp = txt;
+    notifyListeners();
+  }
+
 }
