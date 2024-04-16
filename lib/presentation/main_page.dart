@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -63,7 +64,14 @@ class _MainPageState extends State<MainPage> {
                 Expanded(
                   flex: 3,
                   child: TextField(
-                    controller: myController1 ,
+                   keyboardType: TextInputType.numberWithOptions(decimal: false),
+                   // controller: myController1 ,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                    onChanged: (value) {
+                      viewModel.changeNumber1(value.toString());
+                    },
                   ),
                 )
               ],
@@ -85,7 +93,7 @@ class _MainPageState extends State<MainPage> {
                       },
                     ).toList(),
                     onChanged: (value) {
-                      viewModel.changtext(value!);
+                      viewModel.changtext2(value!);
                     },
                   ),
                 ),
@@ -93,11 +101,20 @@ class _MainPageState extends State<MainPage> {
                 Expanded(
                   flex: 3,
                   child: TextField(
-                    controller: myController2 ,
+                    keyboardType: TextInputType.numberWithOptions(decimal: false),
+                   // controller: myController2 ,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                    onChanged: (value) {
+                      viewModel.changeNumber2(value.toString());
+                      viewModel.calculate();
+                    },
                   ),
                 )
               ],
             ),
+            Text('${viewModel.calculateNum}')
           ],
         ),
       ),

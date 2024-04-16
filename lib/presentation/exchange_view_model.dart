@@ -19,6 +19,29 @@ class ExchangeViewModel with ChangeNotifier {
   String _compare = 'USD';
   String get compare => _compare;
 
+  num number1 = 0;
+  num number2 = 0;
+  num calculateNum = 0;
+
+
+
+
+  void changeNumber1 (String a){
+    number1 = num.parse(a);
+    notifyListeners();
+  }
+
+  void changeNumber2 (String a){
+    number2 = num.parse(a);
+    notifyListeners();
+  }
+
+  void calculate(){
+    calculateNum = (1/number1 * num.parse(_state.exchangeRate.conversionRates[_standarddrp].toString()))/(1/number2 * num.parse(_state.exchangeRate.conversionRates[_compare].toString()));
+    //print('11111111111111111111111111111$calculateNum');
+    notifyListeners();
+  }
+
   void onSearch(String standard) async {
     _state = state.copyWith(isLoading: true);
     notifyListeners();

@@ -8,7 +8,7 @@ class ExchangeRateDataSource {
       'https://v6.exchangerate-api.com/v6/';
 
   Future<ExchangeDto> getExchangeResult(String query) async {
-    final response = await http.get(Uri.parse('$_baseUrl/latest/$query'));
+    final response = await http.get(Uri.parse('$_baseUrl/latest/USD'));
     return ExchangeDto.fromJson(jsonDecode(response.body));
   }
 }
