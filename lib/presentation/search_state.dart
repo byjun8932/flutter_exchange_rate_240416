@@ -10,7 +10,7 @@ part 'search_state.g.dart';
 @freezed
 class SearchState with _$SearchState {
   const factory SearchState({
-    @Default(ExchangeRate(baseCode: '', conversionRates: {},)) ExchangeRate ExchangeRate,
+    @Default(ExchangeRate(baseCode: '', conversionRates: {},)) ExchangeRate exchangeRate,
     @Default(false) bool isLoading,
   }) = _SearchState;
 

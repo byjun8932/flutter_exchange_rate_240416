@@ -17,7 +17,7 @@ class ExchangeViewModel with ChangeNotifier {
     notifyListeners();
 
     _state = state.copyWith(
-      ExchangeRate: await _exchangesRepository.getExchanges(standard),
+      exchangeRate: await _exchangesRepository.getExchanges(standard),
       isLoading: false,
     );
     notifyListeners();

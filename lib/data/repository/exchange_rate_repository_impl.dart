@@ -15,12 +15,6 @@ class ExchangesRepositoryImpl implements ExchangesRepository {
   Future<ExchangeRate> getExchanges(String standard) async {
     final dto = await _exchangeRateDataSource.getExchangeResult(standard);
 
-    if (dto == null) {
-      return ExchangeRate(
-        baseCode: '',
-        conversionRates: {},
-      );
-    }
     return dto.toExchangeRate();
   }
 }

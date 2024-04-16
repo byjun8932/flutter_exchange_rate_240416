@@ -11,26 +11,36 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
+
   @override
   void initState() {
     super.initState();
-    final viewModel = context.read<ExchangeViewModel>();
-    viewModel.onSearch('USD');
+    Future.microtask((){
+      final viewModel = context.read<ExchangeViewModel>();
+      viewModel.onSearch('USD');
+    });
+
   }
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<ExchangeViewModel>();
+    final state = viewModel.state;
+
     return  Scaffold(
       appBar: AppBar(
         title: Text('환율계산기'),
       ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-
-            ],
-          )
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              children: [
+               Text(state.exchangeRate.toString()),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
